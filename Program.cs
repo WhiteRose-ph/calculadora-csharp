@@ -20,6 +20,8 @@ namespace Calculadora
                 Console.WriteLine("(2) Subtração");
                 Console.WriteLine("(3) Multiplicação");
                 Console.WriteLine("(4) Divisão");
+                Console.WriteLine("(5) Potenciação");
+                Console.WriteLine("(6) Raiz quadrada");
 
                 int operador = int.Parse(Console.ReadLine());  // int.Parse > Quando digitamos um número no console, ele entra como string/texto. 
                                                                //Esse Parse serve para converter a representação do número 2 para um número inteiro
@@ -44,6 +46,14 @@ namespace Calculadora
                 {
                     operadorTexto = "divisão";
                 }
+                if (operador == 5)
+                {
+                    operadorTexto = "potenciação";
+                }
+                if (operador == 6)
+                {
+                    operadorTexto = "raiz quadrada";
+                }
 
 
                 Console.WriteLine("Digite o primeiro número da sua operação:");
@@ -52,6 +62,8 @@ namespace Calculadora
                 int num2 = int.Parse(Console.ReadLine());
 
                 int resultado = 0;
+                double resultadoPotencia = 0;
+                double resultadoRaiz = 0;
 
                 switch (operador)
                 {
@@ -75,6 +87,12 @@ namespace Calculadora
                             continue; // Volta ao início do loop para solicitar uma nova operação
                         }
                         break;
+                    case 5:
+                        resultadoPotencia = Potenciacao(num1, num2);
+                        break;
+                    case 6:
+                        resultadoRaiz = Raiz(num1);
+                        break;
 
                     default:
                         Console.WriteLine("Selecione um número correspondente a um operador!");
@@ -82,7 +100,19 @@ namespace Calculadora
                 }
 
 
-                Console.WriteLine("O resultado da {0} entre {1} e {2} é {3}", operadorTexto, num1, num2, resultado);
+                if (operador == 5)
+                {
+                    Console.WriteLine("{0} elevado a {1} é igual a {2}", num1, num2, resultadoPotencia);
+                }
+                if (operador == 6)
+                {
+                    Console.WriteLine("A raiz de {0} é {1}", num1, resultadoRaiz);
+                }
+                else 
+                {
+                    Console.WriteLine("O resultado da {0} entre {1} e {2} é {3}", operadorTexto, num1, num2, resultado);
+                }
+
                 Console.WriteLine(" ");
                 Console.WriteLine("O que deseja fazer agora?");
                 Console.WriteLine("1 - Fazer nova operação");
@@ -96,7 +126,7 @@ namespace Calculadora
                 if (escolha != 1)
                 {
                     Console.WriteLine("Programa encerrado");
-                    Environment.Exit(1); //encerra o programa
+                    Environment.Exit(0); //encerra o programa
                 }
 
 
@@ -124,6 +154,16 @@ namespace Calculadora
         {
             int resultado = num1 / num2;
             return resultado;
+        }
+        public static double Raiz(int num1)
+        {
+            double resultadoRaiz = Math.Sqrt(num1);
+            return resultadoRaiz;
+        }
+        public static double Potenciacao(int num1, int num2)
+        {
+            double resultadoPotencia = Math.Pow(num1, num2);
+            return resultadoPotencia;
         }
     }
 }
